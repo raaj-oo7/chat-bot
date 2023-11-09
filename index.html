@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./images/icons-chatbot.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Chat Bot</title>
+</head>
+
+<body>
+
+
+
+  <header class="heading flex-item">
+    <div class="flex-item">
+      <div class="flex-item">
+        <img src="./images/icons-chatbot.png " class="logo-image">
+      </div>
+      <a href="#" class="login-link"> Chat Bot </a>
+    </div>
+
+    <a target="_blank" href="https://github.com/vercel/nextjs-ai-chatbot/" class="github-link flex-item">
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+        class="regenerate-icon">
+        <title>GitHub</title>
+        <path
+          d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </header>
+
+
+  <div class="hidden-part" id="hidden">
+    <h1 class="welcome-heading">Welcome to Next.js AI Chatbot!</h1>
+    <p class="">This is an open source AI chatbot app template
+      built with
+      <a href="#" class="inline-flex text-decoration">
+        <span>Javacsript</span>
+        <svg aria-hidden="true" height="7" viewBox="0 0 6 6" width="7" opacity="70%">
+          <path
+            d="M1.25215 5.54731L0.622742 4.9179L3.78169 1.75597H1.3834L1.38936 0.890915H5.27615V4.78069H4.40513L4.41109 2.38538L1.25215 5.54731Z"
+            fill="currentColor"></path>
+        </svg>
+      </a>.
+
+    </p>
+    <p class="example-heading">You can start a conversation here or try the
+      following examples:</p>
+    <div class="example-button-handler">
+      <button class="search-examples">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="svg-arrow">
+          <path
+            d="m221.66 133.66-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z">
+          </path>
+        </svg>Explain technical concepts
+      </button>
+      <button class="search-examples">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="svg-arrow">
+          <path
+            d="m221.66 133.66-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z">
+          </path>
+        </svg>Summarize an article
+      </button>
+      <button class="search-examples">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="svg-arrow">
+          <path
+            d="m221.66 133.66-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z">
+          </path>
+        </svg>Draft an email
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="chat-container">
+    <div class="chat-box">
+      <div class="chat" id="chat">
+        <!-- Chat messages will be added here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky-part">
+    <div class="hidden-buttons">
+      <button class="regenerate-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="regenerate-icon">
+          <path
+            d="M197.67 186.37a8 8 0 0 1 0 11.29C196.58 198.73 170.82 224 128 224c-37.39 0-64.53-22.4-80-39.85V208a8 8 0 0 1-16 0v-48a8 8 0 0 1 8-8h48a8 8 0 0 1 0 16H55.44C67.76 183.35 93 208 128 208c36 0 58.14-21.46 58.36-21.68a8 8 0 0 1 11.31.05ZM216 40a8 8 0 0 0-8 8v23.85C192.53 54.4 165.39 32 128 32c-42.82 0-68.58 25.27-69.66 26.34a8 8 0 0 0 11.3 11.34C69.86 69.46 92 48 128 48c35 0 60.24 24.65 72.56 40H168a8 8 0 0 0 0 16h48a8 8 0 0 0 8-8V48a8 8 0 0 0-8-8Z">
+          </path>
+        </svg>Regenerate response
+      </button>
+      <button class="share-button" id="share-button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="share-icon" viewBox="0 0 256 256">
+          <path
+            d="m237.66 106.35-80-80A8 8 0 0 0 144 32v40.35c-25.94 2.22-54.59 14.92-78.16 34.91-28.38 24.08-46.05 55.11-49.76 87.37a12 12 0 0 0 20.68 9.58c11-11.71 50.14-48.74 107.24-52V192a8 8 0 0 0 13.66 5.65l80-80a8 8 0 0 0 0-11.3ZM160 172.69V144a8 8 0 0 0-8-8c-28.08 0-55.43 7.33-81.29 21.8a196.17 196.17 0 0 0-36.57 26.52c5.8-23.84 20.42-46.51 42.05-64.86C99.41 99.77 127.75 88 152 88a8 8 0 0 0 8-8V51.32L220.69 112Z">
+          </path>
+        </svg>Share
+      </button>
+      <button class="share-button" id="stop-button">
+        <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 21C10.22 21 8.47991 20.4722 6.99987 19.4832C5.51983 18.4943 4.36628 17.0887 3.68509 15.4442C3.0039 13.7996 2.82567 11.99 3.17294 10.2442C3.5202 8.49836 4.37737 6.89472 5.63604 5.63604C6.89472 4.37737 8.49836 3.5202 10.2442 3.17294C11.99 2.82567 13.7996 3.0039 15.4442 3.68509C17.0887 4.36628 18.4943 5.51983 19.4832 6.99987C20.4722 8.47991 21 10.22 21 12C21 14.387 20.0518 16.6761 18.364 18.364C16.6761 20.0518 14.387 21 12 21ZM12 4.5C10.5166 4.5 9.0666 4.93987 7.83323 5.76398C6.59986 6.58809 5.63856 7.75943 5.07091 9.12988C4.50325 10.5003 4.35473 12.0083 4.64411 13.4632C4.9335 14.918 5.64781 16.2544 6.6967 17.3033C7.7456 18.3522 9.08197 19.0665 10.5368 19.3559C11.9917 19.6453 13.4997 19.4968 14.8701 18.9291C16.2406 18.3614 17.4119 17.4001 18.236 16.1668C19.0601 14.9334 19.5 13.4834 19.5 12C19.5 10.0109 18.7098 8.10323 17.3033 6.6967C15.8968 5.29018 13.9891 4.5 12 4.5Z"
+            fill="#ffffff" />
+          <path
+            d="M14.5 8H9.5C8.67157 8 8 8.67157 8 9.5V14.5C8 15.3284 8.67157 16 9.5 16H14.5C15.3284 16 16 15.3284 16 14.5V9.5C16 8.67157 15.3284 8 14.5 8Z"
+            fill="#ffffff" />
+        </svg> Stop
+      </button>
+    </div>
+
+    <div class="chat-input-container">
+      <div class="parent-chat-box">
+        <div class="chat-input flex-item">
+          <button class="button-new" id="new-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="h-4 w-4">
+              <path
+                d="M224 128a8 8 0 0 1-8 8h-80v80a8 8 0 0 1-16 0v-80H40a8 8 0 0 1 0-16h80V40a8 8 0 0 1 16 0v80h80a8 8 0 0 1 8 8Z">
+              </path>
+            </svg>
+          </button>
+          <textarea type="text" id="user-message" placeholder="Type a message..."></textarea>
+          <button class="button-send" id="send-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#000000" class="h-4 w-4">
+              <path
+                d="M200 32v144a8 8 0 0 1-8 8H67.31l34.35 34.34a8 8 0 0 1-11.32 11.32l-48-48a8 8 0 0 1 0-11.32l48-48a8 8 0 0 1 11.32 11.32L67.31 168H184V32a8 8 0 0 1 16 0Z">
+              </path>
+            </svg>
+          </button>
+        </div>
+        <p class="parent-box-text">Open source AI chatbot built with
+          <a class="inline-flex">
+            <span>Javascipt</span>
+            <svg aria-hidden="true" height="7" viewBox="0 0 6 6" width="7" opacity="70%">
+              <path
+                d="M1.25215 5.54731L0.622742 4.9179L3.78169 1.75597H1.3834L1.38936 0.890915H5.27615V4.78069H4.40513L4.41109 2.38538L1.25215 5.54731Z"
+                fill="currentColor"></path>
+            </svg>
+          </a>
+          .
+        </p>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
