@@ -27,7 +27,7 @@ function addChatbotMessage(message) {
 }
 
 // copy chat messages 
-function copyTextToClipboard(text) {
+async function copyTextToClipboard(text) {
   // Create a new text area element
   const tempTextArea = document.createElement("textarea");
   tempTextArea.value = text;
@@ -35,18 +35,16 @@ function copyTextToClipboard(text) {
   document.body.appendChild(tempTextArea);
   tempTextArea.select();
 
-  // Use the Clipboard to copy the selected text to the clipboard
-  navigator.clipboard.writeText(text)
-    .then(() => {
-      console.log("Text copied to clipboard: " + text);
-    })
-    .catch(err => {
-      console.error("Unable to copy text to clipboard: " + err);
-    })
-    .finally(() => {
-      // Remove the temporary text area
-      document.body.removeChild(tempTextArea);
-    });
+  try {
+    // Use the Clipboard to copy the selected text to the clipboard
+    await navigator.clipboard.writeText(text);
+    console.log("Text copied to clipboard: " + text);
+  } catch (err) {
+    console.error("Unable to copy text to clipboard: " + err);
+  } finally {
+    // Remove the temporary text area
+    document.body.removeChild(tempTextArea);
+  }
 }
 
 // Function to display messages
@@ -105,7 +103,7 @@ sendButton.addEventListener("click", () => {
         addChatbotMessage(chatbotResponse);
       }, 1500);
     }
-    else{
+    else {
       setTimeout(() => {
         addChatbotMessage("I'm sorry,don't understand explain correctly.");
       }, 2000);
@@ -128,7 +126,7 @@ userMessageInput.addEventListener("keyup", (event) => {
 // Click ON new button and start new conversation
 newButton.addEventListener("click", () => {
   // Clear chat messages
-  messages.length = 0; 
+  messages.length = 0;
   displayMessages();
   chatContainer.innerHTML = '';
 
@@ -138,3 +136,13 @@ newButton.addEventListener("click", () => {
     element.style.display = "block";
   });
 });
+
+function openNav() {
+  document.getElementById("sidebar").style.width = "250px";
+  document.getElementById("content").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("sidebar").style.width = "0";
+  document.getElementById("content").style.marginLeft = "0";
+}
