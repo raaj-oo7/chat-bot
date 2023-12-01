@@ -68,6 +68,9 @@ button {
   border: 0;
   width: 100%;
   gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .sidebar .sidebar-content {
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -76,8 +79,8 @@ button {
   line-height: 1.25rem;
   padding: 12px;
   display: flex;
+  gap: 15px;
   align-items: center;
-  justify-content: space-between;
 }
 .sidebar .sidebar-content .chat-text {
   line-height: 0.75rem;
@@ -89,6 +92,7 @@ button {
   overflow: hidden;
   max-height: 1.25rem;
   position: relative;
+  right: 15px;
 }
 .sidebar .buttons {
   display: flex;
