@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="./images/icons-chatbot.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Include uuid library -->
+  <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
   <link rel="stylesheet" href="./style.css">
   <title>Chat Bot</title>
 </head>
@@ -22,14 +24,29 @@
           <path d="M12 5l0 14"></path>
           <path d="M5 12l14 0"></path>
         </svg>
-        New Chat
+        New chat
       </button>
     </div>
-    <div class="sidebar-search sidebar-item">
-      <input class="search-input sidebar-content" placeholder="Search...">
+    <div class="sidebar-search sidebar-item" id="search-chat">
+      <input class="search-input sidebar-content" id="search-input" placeholder="Search...">
     </div>
+
     <div class="chat-conversion" id="chat-buttons-container">
 
+      <div class="mt-8 select-none text-center text-white opacity-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3">
+          <path d="M12 5h9"></path>
+          <path d="M3 10h7"></path>
+          <path d="M18 10h1"></path>
+          <path d="M5 15h5"></path>
+          <path d="M14 15h1m4 0h2"></path>
+          <path d="M3 20h9m4 0h3"></path>
+          <path d="M3 3l18 18"></path>
+        </svg>
+        <span class="text-[14px] leading-normal">No data.</span>
+      </div>
+      <!-- chat button handler will be add here -->
     </div>
 
     <div class="conversation-handler">
@@ -47,8 +64,10 @@
         </div>
         <span>Clear conversations</span>
       </button>
-      <!-- <input id="import-file" class="sr-only" tabindex="-1" type="file" accept=".json"> -->
-      <button class="fixed-button" id="import-file" type="file" accept=".json">
+
+      <button class="fixed-button" id="importChatsButton">
+        <input type="file" id="importChats" accept=".json" style="display:none;">
+
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -60,7 +79,8 @@
         </div>
         <span>Import data</span>
       </button>
-      <button class="fixed-button" id="exportChat">
+
+      <button class="fixed-button" id="exportAllChats">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -79,9 +99,8 @@
   <div id="content">
     <!-- header -->
     <header class="heading flex-item ">
-      <div id="openBtn" onclick="toggleSidebar()">
+      <button id="openBtn" onclick="toggleSidebar()">
         <div id="openBtnIcon">
-          <!-- Initial icon (can be customized) -->
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="tabler-icon tabler-icon-arrow-bar-right">
@@ -91,13 +110,13 @@
             <path d="M4 4l0 16"></path>
           </svg>
         </div>
-      </div>
+      </button>
 
     </header>
 
     <!-- Title hidden -->
     <div class="hidden-part" id="hidden">
-      <h1 class="welcome-heading"> Chatbot UI</h1>
+      <h1 class="title-heading"> Chatbot UI</h1>
     </div>
 
     <!-- Message conversion -->
@@ -113,7 +132,7 @@
         <div class="parent-chat-box">
           <div class="chat-input flex-item">
             <button class="button-send">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="tabler-icon tabler-icon-bolt">
                 <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
@@ -121,7 +140,7 @@
             </button>
             <textarea type="text" id="user-message" placeholder="Type a message..."></textarea>
             <button class="button-send" id="send-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="tabler-icon tabler-icon-send">
                 <path d="M10 14l11 -11"></path>
@@ -129,22 +148,23 @@
               </svg>
             </button>
           </div>
-          <p class="parent-box-text">Open source AI chatbot built with
+          <p class="parent-box-text">
             <a class="inline-flex">
-              <span>Javascipt</span>
-              <svg aria-hidden="true" height="7" viewBox="0 0 6 6" width="7" opacity="70%">
-                <path
-                  d="M1.25215 5.54731L0.622742 4.9179L3.78169 1.75597H1.3834L1.38936 0.890915H5.27615V4.78069H4.40513L4.41109 2.38538L1.25215 5.54731Z"
-                  fill="currentColor"></path>
-              </svg>
+              <span>ChatBot UI</span>.
             </a>
-            .
+            Chatbot UI is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and
+            functionality.
           </p>
         </div>
       </div>
     </div>
   </div>
-  <script src="./main.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/chatHandlers.js"></script>
+  <script src="./js/importExport.js"></script>
+  <script src="./js/messageHandler.js"></script>
+  <script src="./js/sidebar.js"></script>
+  <script src="./js/displayHandlers.js"></script>
 </body>
 
 </html>
